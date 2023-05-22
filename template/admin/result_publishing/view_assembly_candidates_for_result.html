@@ -1,0 +1,50 @@
+RESULT DETAILS
+<form method="post" action="publish_result_action">
+{% csrf_token %}
+<input type="hidden" name="hdn_assembly" id="hdn_assembly" value="{{assembly}}"  />
+<table  border="2" cellpadding="15px" cellspacing="15px" >
+
+{% if data %}
+<tr>
+   <th>Candidate Name</th>
+
+  
+   <th>Party</th>
+
+
+<th>Symbol</th>
+
+
+   <th>Count</th>
+
+   
+</tr>
+{% for v in data %}
+<tr>
+  <td>{{v.candidateregisterid.firstname}} {{v.candidateregisterid.lastname}}</td>
+
+  
+  <td>{{v.candidateregisterid.partyid.partyname}}</td>
+
+
+ <td> <img src="{{v.candidateregisterid.symbol.symbol.url}}"  alt="No Symbol" width="150px" length="155px"/></td>
+
+  <td>{{v.count}}</td>
+
+    
+<td><input type="checkbox" name="chk[]" id="chk[]" value="{{v.id}}"   checked /></td>
+
+
+    <!--<td><a href="{% url 'candidate_details' v.id %}">Details</a></td>-->
+</tr>
+{% endfor %}
+    {% else %}
+    list is empty
+    {% endif %}
+
+
+</table>
+<input type="submit" name="process" value="Publish Result" class="btn cryptos-btn mt-50"  /></td>
+
+
+</form>

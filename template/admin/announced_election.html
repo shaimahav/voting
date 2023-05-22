@@ -1,0 +1,96 @@
+{% extends 'admin/view_base.html'%}
+
+{% block content %}
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<h3>ANNOUNCED <span>ELECTIONS</span></h3>
+
+<table cellpadding="5px" cellspacing="5px">
+    <table border="2" cellpadding="5px" cellspacing="5px">
+{% if data %}
+    <tr>
+        <th>Election Name</th>
+
+
+     <th>State</th>
+         
+
+     <th>District</th>
+         
+
+     <th>Landmark</th>
+    
+
+     <th>Assembly</th>
+	
+
+        <th>Declaration Date</th>
+		
+
+
+
+     <th>Nomination Submission Date</th>
+	
+
+     <th>Nomination Withdraw Date</th>
+
+  
+
+     <th>Campine Starting Date</th>
+
+   
+
+     <th> Campine Ending Date</th>
+
+
+    
+
+     <th>Election Date</th>
+
+   
+
+     <th>Result Date</th>
+    </tr>
+    {% for v in data %}
+<tr>
+    <td>{{v.election_name}}</td>
+
+    <td>{{v.stateid.state}}</td>
+
+    <td>{{v.district.district}}</td>
+
+    <td>{{v.landmark.place}}</td>
+
+    <td>{{v.assembly.assemblyname}}</td>
+
+    <td>{{v.declarationdate}}</td>
+
+  
+    <td>{{v.nominationsubmissiondate}}</td>
+
+   
+    <td>{{v.nominationwithdrawdate}}</td>
+
+  
+    <td>{{v.campinestartingdate}}</td>
+
+   
+    <td>{{v.campineendingdate}}</td>
+
+   
+    <td>{{v.electiondate}}</td>
+
+  
+    <td>{{v.resultdate}}</td>
+
+   
+</tr>
+{% endfor %}
+    {% else %}
+    list is empty
+    {% endif %}
+</table>
+                    </div>
+</div>
+
+{% endblock %}

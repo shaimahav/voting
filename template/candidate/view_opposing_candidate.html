@@ -1,0 +1,42 @@
+{% extends 'candidate/view_base.html'%}
+
+{% block content %}
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<h3>VIEW <span>OPPOSING CANDIDATES</span><br></h3>
+<table border="2" cellpadding="5px" cellspacing="5px">
+{% if data %}
+    <tr>
+
+     <th>Firstname</th>
+
+        <th>Lastname</th>
+
+     <th>Gender</th>
+
+        <th>Party</th>
+
+     <th>Symbol</th>
+    </tr>
+    {% for v in data %}
+
+<tr>
+  <td>{{v.firstname}}</td>
+
+    <td>{{v.lastname}}</td>
+
+    <td>{{v.gender}}</td>
+
+   <td>{{v.partyid.partyname}}</td>
+
+    <td> <img src="{{v.symbol.symbol.url}}" alt="image" length="50px" width="55px"/> </td>
+
+    </tr>
+{% endfor %}
+    {% else %}
+    list is empty
+    {% endif %}
+</table>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script type="text/javascript">
+		function validation()
+		{
+			var alpha=/^[a-zA-Z]+$/;
+			var num=/^[0-9]+$/;
+
+			var alphanum=/^(?=.*[a-zA-Z])(?=.*[0-9])/; //atleast one digit
+
+			//var email=/^[\w\-\.\+]+\@[a-z A-Z 0-9\.\-]+\.[a-z A-Z 0-9]{2,4}$/;
+
+            var qualification=document.work.qualification;
+            var work1=document.work.work1;
+            var work1photo=document.work.work1photo;
+            var work2=document.work.work2;
+            var work2photo=document.work.work2photo;
+            var work3=document.work.work3;
+            var work3photo=document.work.work3photo;
+            var achievements=document.work.achievements;
+
+            if(qualification.value.length==0)
+			{
+				alert("Please Enter your qualification ");
+				qualification.focus();
+				return false;
+			}
+			if(work1.value.length==0)
+			{
+				alert("Please Enter your work1 ");
+			    work1.focus();
+				return false;
+			}
+			if(work1photo.value.length==0)
+			{
+				alert("Please upload your work1 photo  ");
+				work1photo.focus();
+				return false;
+			}
+			if(work2.value.length==0)
+			{
+				alert("Please Enter your work2 ");
+			    work2.focus();
+				return false;
+			}
+			if(work2photo.value.length==0)
+			{
+				alert("Please upload your work2 photo  ");
+				work2photo.focus();
+				return false;
+			}
+			if(work3.value.length==0)
+			{
+				alert("Please Enter your work3 ");
+			    work3.focus();
+				return false;
+			}
+			if(work3photo.value.length==0)
+			{
+				alert("Please upload your work3 photo  ");
+				work3photo.focus();
+				return false;
+			}
+			if(achievements.value.length==0)
+			{
+				alert("Please Enter your achievements ");
+				achievements.focus();
+				return false;
+			}
+			else
+			{
+			return true;
+			}
+		}
+
+
+
+
+</script>
+
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<h3>ADD <span>WORK</span><br></h3>
+                        <form method="post"  name="work" action="{% url 'add_profile_action' %}" enctype="multipart/form-data">
+{% csrf_token %}
+     <input type="hidden" name="hdn" id="hdn" value="{{username}}" />
+
+Qualification:<input type="text" name="qualification" class="form-control" style="height:50px">
+Work 1:<textarea rows="2" col="5" name="work1" class="form-control" style="height:50px">
+</textarea>
+Work 1 Photo:<input type="file" name="work1photo" class="form-control" style="height:50px">
+
+Work 2:<textarea rows="2" col="5" name="work2" class="form-control" style="height:50px">
+</textarea>
+Work 2 Photo:<input type="file" name="work2photo" class="form-control" style="height:50px">
+
+Work 3 :<textarea rows="2" col="5" name="work3" class="form-control" style="height:50px">
+</textarea>
+Work 3 Photo:<input type="file" name="work3photo" class="form-control" style="height:50px">
+
+Achievements:<textarea rows="2" col="5" name="achievements" class="form-control" style="height:50px">
+</textarea>
+
+<input type="submit" value="SUBMIT" class="btn cryptos-btn btn-2 mt-30" onclick="return validation()">
+
+                        {% if msg %}
+
+    <script type="text/javascript">
+        alert("Registration completed successfully");
+     </script>
+    {% endif %}
+                            </form>
+                    </div>
+</div>
+
+{% endblock %}

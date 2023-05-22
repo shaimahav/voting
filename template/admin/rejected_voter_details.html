@@ -1,0 +1,50 @@
+{% extends 'admin/view_base.html'%}
+
+{% block content %}
+<div class="col-16 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<h3> REJECTED<span>VOTER DETAILS</span><br></h3>
+
+<table border="2" cellpadding="5px" cellspacing="5px" >
+
+{% if adhar %}
+    {% for v in adhar %}
+
+
+    <tr><th>State</th><td>{{v.voterregisterid.state.state}}</td></tr>
+
+    <tr><th>District</th><td>{{v.voterregisterid.district.district}}</td></tr>
+
+    <tr><th>Landmark</th> <td>{{v.voterregisterid.location.place}}</td></tr>
+
+
+    <tr><th>Assembly</th><td>{{v.voterregisterid.assembly.assemblyname}}</td></tr>
+
+
+    <tr><th>Adhar Copy</th><td><img src="{{v.adhar.url}}" alt="image" length="50px" width=55px"/> </td></tr>
+
+
+        {% endfor%}
+
+
+
+{% for v in voterid %}
+  <tr> <th>Voter ID Copy</th> <td><img src="{{v.voteridcopy.url}}" alt="image" length="50px" width="55px"/> </td> </tr>
+
+
+     {% endfor%}
+
+{% for v in photo %}
+    <tr> <th>Photo</th> <td><img src="{{v.photo.url}}" alt="image" length="50px" width="55px"/> </td> </tr>
+
+    </tr>
+     {% endfor %}
+    {% else %}
+    list is empty
+    {% endif %}
+
+</table>
+
+                    </div>
+</div>
+{% endblock %}

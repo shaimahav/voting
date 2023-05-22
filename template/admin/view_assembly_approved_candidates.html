@@ -1,0 +1,75 @@
+
+
+
+<table border="2" cellpadding="5px" cellspacing="5px" >
+
+{% if data %}
+
+
+
+
+    <tr>
+     <th>Firstname</th>
+
+        <th>Lastname</th>
+
+        <th>Address</th>
+
+        <th>Gender</th>
+
+        <th>Date of Birth</th>
+
+        <th>Adhar No</th>
+
+        <th>Voter ID No</th>
+
+        <th>Email</th>
+
+        <th>Mobile</th>
+
+         <th>Party</th>
+
+
+    </tr>
+
+
+
+{% for v in data %}
+    <tr>
+
+    <td>{{v.firstname}}</td>
+
+    <td>{{v.lastname}}</td>
+
+    <td>{{v.address}}</td>
+
+  <td>{{v.gender}}</td>
+
+ <td>{{v.dateofbirth}}</td>
+
+        <td>{{v.adharno}}</td>
+
+        <td>{{v.voterid}}</td>
+
+        <td>{{v.email}}</td>
+
+        <td>{{v.mobile}}</td>
+
+    <td>{{v.partyid.partyname}}</td>
+
+
+        <td><a href="{% url 'approved_candidate_details' v.id  %}">Details</a></td>
+    </tr>
+{% endfor %}
+
+    {% else %}
+    list is empty
+    {% endif %}
+
+
+  </table>
+
+
+
+
+

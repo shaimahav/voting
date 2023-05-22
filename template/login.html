@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+<script type="text/javascript">
+		function validation()
+		{
+			var alpha=/^[a-zA-Z]+$/;
+			var num=/^[0-9]+$/;
+
+			var alphanum=/^(?=.*[a-zA-Z])(?=.*[0-9])/; //atleast one digit
+
+			//var email=/^[\w\-\.\+]+\@[a-z A-Z 0-9\.\-]+\.[a-z A-Z 0-9]{2,4}$/;
+
+			var unme=document.login.uname;
+
+			var psw=document.login.pname;
+
+
+			if(unme.value.length==0)
+			{
+				alert("Please Enter your Username");
+				unme.focus();
+				return false;
+			}
+			if(psw.value.length==0)
+			{
+				alert("Please Enter your Password" );
+				psw.focus();
+				return false;
+			}
+
+			else if(!psw.value.match(alphanum))
+			{
+				alert("Password Contain Letters and Numbers");
+				psw.focus();
+				return false;
+			}
+			else if((psw.value.length<8)||(psw.value.length>8))
+			{
+				alert("Password Contain length 8");
+				psw.focus();
+				return false;
+			}
+            else
+			{
+			return true;
+			}
+		}
+
+
+
+
+</script>
+
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+
+<h3>Sign In <span>Here</span> </h3>
+<form method="post" name="login" action="{% url 'LoginAction' %}">
+    {% csrf_token %}
+<center>
+Username:<input type='text' name='uname' class="form-control"/>
+Password:<input type='password' name='pname' class="form-control"/>
+<input type='submit'value='SUBMIT' class="btn cryptos-btn btn-2 mt-30" onclick="return validation()">
+
+</center>
+    {% if msg %}
+<script type="text/javascript">
+        alert("Invalid User........");
+     </script>
+{% endif %}
+
+</form>
+</div>
+</div>
+{% endblock %}

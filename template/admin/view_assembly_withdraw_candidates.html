@@ -1,0 +1,22 @@
+
+<table border="2"  cellpadding="5px" cellspacing="5px">
+{% if data %}
+<tr>
+   <th>Name</th>
+
+
+    <th>Reason</th>
+
+</tr>
+    {% for v in data %}
+<tr>
+  <td>{{v.c_id.firstname}} {{v.c_id.lastname}}</td>
+
+  <td>{{v.reason}}</td>
+
+</tr>
+    {% endfor %}
+    {% else %}
+    list is empty
+    {% endif %}
+</table>

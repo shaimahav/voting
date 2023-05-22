@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<form method="post" action="{% url 'admin_mail_action' %}" enctype="multipart/form-data">
+{% csrf_token %}
+    <input type="submit" value="SEND">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends 'admin/view_base.html'%}
+
+{% block content %}
+
+<div class="col-16 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<h3> APPROVED<span>CANDIDATE DETAILS</span><br></h3>
+
+<table border="2"  cellpadding="2px" cellspacing="2px" >
+
+{% if adhar %}
+    {% for v in adhar %}
+
+
+    <tr><th>State</th><td>{{v.candidateregisterid.stateid.state}}</td></tr>
+
+    <tr><th>District</th><td>{{v.candidateregisterid.district.district}}</td></tr>
+
+    <tr><th>Landmark</th> <td>{{v.candidateregisterid.place.place}}</td></tr>
+
+
+    <tr><th>Assembly</th><td>{{v.candidateregisterid.assemblyname.assemblyname}}</td></tr>
+
+
+    <tr><th>Adhar Copy</th><td><img src="{{v.adhar.url}}" alt="image" length="50px" width=55px"/> </td></tr>
+
+
+        {% endfor%}
+
+{% for v in symbol %}
+    <tr><th>Symbol</th><td><img src="{{v.symbol.symbol.url}}" alt="image" length="50px" width="55px"/> </td></tr>
+
+
+        {% endfor%}
+
+{% for v in voterid %}
+  <tr> <th>Voter ID Copy</th> <td><img src="{{v.voteridcopy.url}}" alt="image" length="50px" width="55px"/> </td> </tr>
+
+
+     {% endfor%}
+
+{% for v in photo %}
+    <tr> <th>Photo</th> <td><img src="{{v.photo.url}}" alt="image" length="50px" width="55px"/> </td> </tr>
+
+
+     {% endfor %}
+    {% else %}
+    list is empty
+    {% endif %}
+
+</table>
+                    </div>
+</div>
+
+
+{% endblock %}

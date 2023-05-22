@@ -1,0 +1,67 @@
+{% extends 'candidate/base.html'%}
+
+{% block content %}
+
+<script type="text/javascript">
+		function validation()
+		{
+			var alpha=/^[a-zA-Z]+$/;
+			var num=/^[0-9]+$/;
+
+			var alphanum=/^(?=.*[a-zA-Z])(?=.*[0-9])/; //atleast one digit
+
+			//var email=/^[\w\-\.\+]+\@[a-z A-Z 0-9\.\-]+\.[a-z A-Z 0-9]{2,4}$/;
+
+			var reason=document.reason.reason;
+
+			if(reason.value.length==0)
+			{
+				alert("Please Enter your reason for withdraw ");
+				reason.focus();
+				return false;
+			}
+			else
+			{
+			return true;
+			}
+		}
+
+</script>
+
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<h3>WITHDRAW<br></h3>
+ <form method="post" name="reason" action="{% url 'withdrawaction' %}" enctype="multipart/form-data">
+{% csrf_token %}
+
+Reason:<textarea rows="2"  col="5" name='reason' class="form-control" style="height:50px">
+</textarea>
+<input type='submit' value='WITHDRAW' id="btnsave" class="btn cryptos-btn btn-2 mt-30" onclick="return validation()">
+     {% if msg1 %}
+
+    <script type="text/javascript">
+        alert("Withdraw successfully");
+     </script>
+    {% endif %}
+
+
+  {% if msg2 %}
+
+    <script type="text/javascript">
+        alert("Candidate Withdrawal  Date Exceeded");
+     </script>
+    {% endif %}
+
+
+ {% if msg3 %}
+
+    <script type="text/javascript">
+        alert("Invalid Withdrawal");
+     </script>
+    {% endif %}
+
+
+ </form>
+                    </div>
+</div>
+{% endblock %}

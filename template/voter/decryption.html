@@ -1,0 +1,45 @@
+{% extends 'voter/view_base.html' %}
+{% block content %}
+
+<form method="post" action="{% url 'decryptionAction' %}" enctype="multipart/form-data">
+{% csrf_token %}
+
+
+{% for v in candidate %}
+<input type="hidden" name="hdn_candidate_id" id="hdn_candidate_id" value="{{v.candidateregisterid.id}}" />
+
+
+
+ <div class="col-12">
+                                <div class="single-blog-area blog-style-2 mb-100">
+                                    <!-- Thumbnail -->
+                                    <div class="blog-thumbnail">
+                                        <img src="{{v.photo.url}}" alt="">
+                                    </div>
+                                    <!-- Content -->
+                                    <div class="blog-content">
+                                        <a href="#" class="post-title">{{v.candidateregisterid.firstname}} {{v.candidateregisterid.lastname}}</a>
+                                        <div class="meta-data">
+                                             <a href="#">Party: {{v.candidateregisterid.partyid.partyname}}</a> <br>
+                                            <!--<a href="#">March 18, 2018</a>-->
+                                        </div>
+										
+                                        <!--<p>Morbi vel arcu gravida, iaculis lacus vel, posuere ipsum. Sed faucibus mauris vitae urna consectetur, sit amet maximus nisl sagittis.</p>
+                                        <a href="#" class="btn cryptos-btn mt-50">Read More</a>-->
+                                    </div>
+                                </div>
+                            </div>
+
+
+{% endfor %}
+
+
+
+
+<img src="/media/{{path}}" /><br/><br/>
+<input type="text" name="txtpswd" id="txtpswd" class="form-control" placeholder="Type your captcha here" /><br>
+<input type="submit" class="btn cryptos-btn mt-50" value="Check Captcha" />
+
+</form>
+
+{% endblock %}

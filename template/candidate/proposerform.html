@@ -1,0 +1,119 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<script type="text/javascript">
+		function validation()
+		{
+			var alpha=/^[a-zA-Z]+$/;
+			//var num=/^[0-9]+$/;
+
+			var alphanum=/^(?=.*[a-zA-Z])(?=.*[0-9])/; //atleast one digit
+
+			//var email=/^[\w\-\.\+]+\@[a-z A-Z 0-9\.\-]+\.[a-z A-Z 0-9]{2,4}$/;
+
+            var nam=document.proposer.p1name;
+            var voterid= document.proposer.vrid1;
+            var names=document.proposer.p2name;
+			var voterids=document.proposer.vrid2;
+
+
+
+			if(nam.value.length==0)
+			{
+				alert("Please Enter your proposer name ");
+				nam.focus();
+				return false;
+			}
+			else if(!nam.value.match(alpha))
+			{
+				alert("invalid name");
+				nam.focus();
+				return false;
+			}
+			if(voterid.value.length==0)
+			{
+				alert("Please Enter the proposer   Voter ID");
+			    voterid.focus();
+				return false;
+			}
+			else if(!voterid.value.match(alphanum))
+			{
+				alert("invalid Voter ID");
+				voterid.focus();
+				return false;
+			}
+			else if(!voterid.value.match(alphanum))
+			{
+				alert("VoterID contain letters and digits");
+				voterid.focus();
+				return false;
+			}
+			else if((voterid.value.length<10)||(voterid.value.length>10))
+			{
+				alert(" Voter ID contain length 10");
+				voterid.focus();
+				return false;
+			}
+			if(names.value.length==0)
+			{
+				alert("Please Enter your proposer name ");
+				names.focus();
+				return false;
+			}
+			else if(!names.value.match(alpha))
+			{
+				alert("invalid name");
+				names.focus();
+				return false;
+			}
+
+			if(voterids.value.length==0)
+			{
+				alert("Please Enter your proposer  Voter ID");
+			    voterids.focus();
+				return false;
+			}
+			else if(!voterids.value.match(alphanum))
+			{
+				alert("VoterID contain letters and digits");
+				voterids.focus();
+				return false;
+			}
+			else if((voterids.value.length<10)||(voterids.value.length>10))
+			{
+				alert(" Voter ID contain length 10");
+				voterids.focus();
+				return false;
+			}
+
+			else
+			{
+			return true;
+			}
+		}
+
+
+</script>
+<h3>ADD <span>PROPOSER</span><br></h3>
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<form method="post" name="proposer" action="{% url 'proposeraddaction' %}">
+    {% csrf_token %}
+    <input type="hidden" name="hdn" id="hdn" value="{{username}}" />
+Proposer 1<br>
+Name:<input type="text" name="p1name" id="p1" class="form-control"/>
+    Voter ID:<input type="text" name="vrid1" id="v1" class="form-control"/>
+    <br>
+
+        Proposer 2<br>
+Name:<input type="text" name="p2name" id="p2" class="form-control"/>
+Voter ID:<input type="text" name="vrid2" id="v2" class="form-control"/>
+
+<input type='submit'value='NEXT' id="btnsave"class="btn cryptos-btn btn-2 mt-30" onclick="return validation()">
+
+
+</form>
+
+</div>
+</div>
+{% endblock %}

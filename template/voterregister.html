@@ -1,0 +1,384 @@
+{% extends 'base_new.html' %}
+{% block content %}
+{% load static %}
+
+
+
+
+    <script src="/static/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function(){
+
+        $("#uname").change( function(){
+             uname=$("#uname").val();
+
+            $.ajax({
+
+            url:"{%  url  'checkUsername' %}",
+            data:{'username':uname},
+            success:function(data)
+            {
+
+             if(data.k1=="exists")
+             {
+             alert("Already exists");
+             $("#btnsave").hide();
+             }
+             else
+             {
+             alert("Valid Username");
+             $("#btnsave").show();
+             }
+            }
+            });
+        });
+         $("#ddlstate").change( function(){
+             stateid=$("#ddlstate").val();
+
+            $.ajax({
+
+            url:"{%  url  'getDistrict' %}",
+            data:{'state_id':stateid},
+            success:function(data)
+            {
+$('#ddldistrict').html(data);
+
+            }
+            });
+        });
+
+
+
+        $("#ddldistrict").change( function(){
+             districtid=$("#ddldistrict").val();
+
+            $.ajax({
+
+            url:"{%  url  'getplace' %}",
+            data:{'district_id':districtid},
+            success:function(data)
+            {
+$('#ddlplace').html(data);
+
+            }
+            });
+        });
+
+
+     $("#ddlplace").change( function(){
+             landmarkid=$("#ddlplace").val();
+
+            $.ajax({
+
+            url:"{%  url  'getassembly' %}",
+            data:{'place_id':landmarkid},
+            success:function(data)
+            {
+$('#ddlassembly').html(data);
+
+            }
+            });
+        });
+
+        });
+
+   </script>
+
+<script type="text/javascript">
+		function validation()
+		{
+			var alpha=/^[a-zA-Z]+$/;
+			var num=/^[0-9]+$/;
+
+			var alphanum=/^(?=.*[a-zA-Z])(?=.*[0-9])/; //atleast one digit
+
+			var email=/^[\w\-\.\+]+\@[a-z A-Z 0-9\.\-]+\.[a-z A-Z 0-9]{2,4}$/;
+			var nam=document.voterRegister.fname;
+			var lname=document.voterRegister.lname;
+            var address=document.voterRegister.address;
+            var dob=document.voterRegister.dob;
+            var adhar=document.voterRegister.adharno;
+            var voterid=document.voterRegister.voterid;
+            var mail=document.voterRegister.email;
+            var mob=document.voterRegister.mobile;
+            var state=document.voterRegister.state;
+            var district=document.voterRegister.district;
+            var landmark=document.voterRegister.location;
+            var assembly=document.voterRegister.assembly;
+            var voteridupload=document.voterRegister.voteridcopy;
+            var adharupload=document.voterRegister.adharcopy;
+            var photo=document.voterRegister.photo;
+
+			var unme=document.voterRegister.uname;
+
+			var psw=document.voterRegister.pswd;
+
+
+
+
+            if(nam.value.length==0)
+			{
+				alert("Please Enter your first name ");
+				nam.focus();
+				return false;
+			}
+			else if(!nam.value.match(alpha))
+			{
+				alert("invalid name");
+				nam.focus();
+				return false;
+			}
+			if(lname.value.length==0)
+			{
+				alert("Please Enter your last name ");
+				lname.focus();
+				return false;
+			}
+			else if(!lname.value.match(alpha))
+			{
+				alert("invalid name");
+				lname.focus();
+				return false;
+			}
+			if(address.value.length==0)
+			{
+				alert("Please Enter your  address");
+				address.focus();
+				return false;
+			}
+
+			else if(!address.value.match(alphanum))
+			{
+				alert("Please enter the pin code also");
+				address.focus();
+				return false;
+			}
+            if(dob.value.length==0)
+			{
+				alert("Please Enter your  Date of Birth");
+			    dob.focus();
+				return false;
+			}
+			if(adhar.value.length==0)
+			{
+				alert("Please Enter your  Adhar Number");
+			    adhar.focus();
+				return false;
+			}
+			else if(!adhar.value.match(num))
+			{
+				alert("Adhar Number contain only digit");
+				address.focus();
+				return false;
+			}
+			else if((adhar.value.length<12)||(adhar.value.length>12))
+			{
+				alert("Adhar Number contain length 12");
+				adhar.focus();
+				return false;
+			}
+			if(voterid.value.length==0)
+			{
+				alert("Please Enter your   Voter ID");
+			    voterid.focus();
+				return false;
+			}
+			else if(!voterid.value.match(alphanum))
+			{
+				alert("VoterID contain letters and digits");
+				voterid.focus();
+				return false;
+			}
+			else if((voterid.value.length<10)||(voterid.value.length>10))
+			{
+				alert(" Voter ID contain length 10");
+				voterid.focus();
+				return false;
+			}
+			if(mail.value.length==0)
+			{
+				alert("Please Enter your   Email");
+			    mail.focus();
+				return false;
+			}
+			else if(!mail.value.match(email))
+			{
+				alert("invalid Email");
+				mail.focus();
+				return false;
+			}
+			if(mob.value.length==0)
+			{
+				alert("Please Enter your   Mobile");
+			    mob.focus();
+				return false;
+			}
+			else if(!mob.value.match(num))
+			{
+				alert("mobile number contaion only digits");
+				mob.focus();
+				return false;
+			}
+			else if((mob.value.length<10)||(mob.value.length>10))
+			{
+				alert("Mobile Number contain length 10");
+				mob.focus();
+				return false;
+			}
+			if(state.value=="00")
+			{
+				alert("Please select your state ");
+				return false;
+			}
+			if(district.value=="00")
+			{
+				alert("Please select your district ");
+				return false;
+			}
+			if(landmark.value=="00")
+			{
+				alert("Please select your landmark ");
+				return false;
+			}
+			if(assembly.value=="00")
+			{
+				alert("Please select your assembly ");
+				return false;
+			}
+			if(voteridupload.value.length==0)
+			{
+				alert("Please upload your  voter ID");
+				voteridupload.focus();
+				return false;
+			}
+			if(adharupload.value.length==0)
+			{
+				alert("Please upload your  adhar copy");
+				adharupload.focus();
+				return false;
+			}
+			if(photo.value.length==0)
+			{
+				alert("Please upload your photo");
+				photo.focus();
+				return false;
+			}
+			if(unme.value.length==0)
+			{
+				alert("Please Enter your Username");
+				unme.focus();
+				return false;
+			}
+			if(psw.value.length==0)
+			{
+				alert("Please Enter your Password" );
+				psw.focus();
+				return false;
+			}
+			else if(!psw.value.match(alphanum))
+			{
+				alert("Password Contain Letters and Numbers");
+				psw.focus();
+				return false;
+			}
+			else if((psw.value.length<8)||(psw.value.length>8))
+			{
+				alert("Password Contain length 8");
+				psw.focus();
+				return false;
+			}
+
+			 else
+			{
+			return true;
+			}
+		}
+
+
+
+</script>
+
+
+
+
+<div class="blog-section-heading">
+                                    <h3>Voter's Account</h3>
+                                </div>
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<form method="post" name="voterRegister" action="{% url 'voterregisteraction' %}" enctype="multipart/form-data">
+{% csrf_token %}
+    Firstname:<input type='text' name='fname' class="form-control">
+    Lastname:<input type='text' name='lname' class="form-control">
+Address:<textarea rows="4" col="9" name='address' class="form-control" style="height:50px">
+</textarea><br>
+Gender:<input type='radio' name=gender value='MALE' checked>MALE
+       <input type='radio' name=gender value='FEMALE'>FEMALE<br /><br />
+    Date of Birth:<input type="date" name="dob"class="form-control">
+
+    Adhar Number:<input type='text' name='adharno' class="form-control">
+    Voter ID:<input type='text' name='voterid'class="form-control">
+    Email ID:<input type='email' name='email' class="form-control">
+    Mobile:<input type='text' name='mobile'class="form-control">
+
+    State:<select name='state' id="ddlstate" class="form-control" style="height:50px">
+<option value="00">select</option>
+{% for c in state %}
+<option value="{{c.id}}">{{c.state}}
+</option>
+{% endfor %}
+</select>
+
+     District:<select name='district' id="ddldistrict" class="form-control" style="height:50px">
+    <option value="00">select</option>
+
+</select>
+
+    Landmark:<select name='location' id="ddlplace" class="form-control" style="height:50px" >
+<option value="00">select</option>
+
+</select>
+
+    Assembly:<select name='assembly' id="ddlassembly" class="form-control" style="height:50px">
+<option value="00">select</option>
+
+</select>
+   Voter ID Upload:<input type="file" name="voteridcopy" id="vupload"class="form-control"/>
+    Adhar Upload:<input type="file" name="adharcopy" id="apload"class="form-control"/>
+   Photo Upload:<input type="file" name="photo" id="pupload"class="form-control"/>
+
+
+
+Username:<input type='text' name='uname' id="uname"class="form-control">
+Password:<input type='password' name='pswd'class="form-control">
+<input type='submit'value='REGISTER' id="btnsave"class="btn cryptos-btn btn-2 mt-30" onclick="return validation()">
+{% if msg %}
+
+   {{ msg }}
+    {% endif %}
+
+
+ <script type="text/javascript">
+{% if msg1 %}
+alert('Registration completed successfully');
+{% endif %}
+ </script>
+
+<script type="text/javascript">
+{% if msg2 %}
+alert('Age is Invalid');
+{% endif %}
+ </script>
+
+<script type="text/javascript">
+{% if msg3 %}
+alert('MailId Already Exists');
+{% endif %}
+ </script>
+
+</form>
+</div>
+</div>
+{% endblock %}
+

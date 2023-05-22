@@ -1,0 +1,66 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+<script type="text/javascript">
+		function validation()
+		{
+			var alpha=/^[a-zA-Z]+$/;
+			//var num=/^[0-9]+$/;
+
+			//var alphanum=/^(?=.*[a-zA-Z])(?=.*[0-9])/; //atleast one digit
+
+			//var email=/^[\w\-\.\+]+\@[a-z A-Z 0-9\.\-]+\.[a-z A-Z 0-9]{2,4}$/;
+			 var landmark=document.assembly.landmark;
+			 var assembly=document.assembly.assembly;
+            if(landmark.value=="00")
+			{
+				alert("Please select your landmark ");
+				return false;
+			}
+			if(assembly.value.length==0)
+			{
+				alert("Please Enter assembly name ");
+				assembly.focus();
+				return false;
+			}
+			else if(!assembly.value.match(alpha))
+			{
+				alert("invalid assembly name");
+				assembly.focus();
+				return false;
+			}
+
+			else
+			{
+			return true;
+			}
+		}
+
+
+
+
+</script>
+
+<h3>ADD <span>ASSEMBLY</span><br></h3>
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+ <form method="post" name="assembly" action="{% url 'assemblyaddaction' %}">
+     {% csrf_token %}
+    
+    LANDMARK:<select name='landmark' class="form-control"  style="height:50px">
+<option value="00">select</option>
+{% for c in data %}
+<option value="{{c.id}}">{{c.place}}
+</option>
+{% endfor %}
+     </select>
+ ASSEMBLY:<input type="text" name="assembly" class="form-control"  style="height:50px">
+     <input type="submit" value="add" class="btn cryptos-btn btn-2 mt-30" onclick="return validation()">
+     {% if msg %}
+        {{msg}}
+        {% endif %}
+
+ </form>
+ </div>
+ </div>
+
+{% endblock %}

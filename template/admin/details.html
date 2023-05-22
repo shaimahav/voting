@@ -1,0 +1,62 @@
+{% extends 'admin/view_base.html'%}
+
+{% block content %}
+<h3>VOTER DETAILS</h3>
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+
+
+<form method="post" action="{% url 'manageUser' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+<table border="2" cellpadding="5px" cellspacing="5px">
+{% if adhar %}
+
+    {% for v in adhar %}
+
+<input type="hidden" name="hdnid" value="{{voterregid}}" />
+<td>
+    <tr><th>Firstname</th><td>{{v.voterregisterid.firstname}}</td></tr>
+    <tr><th>Lastname</th><td>{{v.voterregisterid.lastname}}</td></tr>
+    <tr><th>Address</th><td>{{v.voterregisterid.address}}</td></tr>
+  <tr><th>Gender</th><td>{{v.voterregisterid.gender}}</td></tr>
+  <tr><th>Date of Birth</th><td>{{v.voterregisterid.dateofbirth}}</td></tr>
+        <tr><th>Adhar Number</th><td>{{v.voterregisterid.adharno}}</td></tr>
+        <tr><th>Voter ID Number</th><td>{{v.voterregisterid.voterid}}</td></tr>
+        <tr><th>Email</th><td>{{v.voterregisterid.email}}</td></tr>
+        <tr><th>Mobile</th><td>{{v.voterregisterid.mobile}}</td></tr>
+    <tr><th>Location</th><td>{{v.voterregisterid.location.place}}</td></tr>
+    <tr><th>Assembly</th><td>{{v.voterregisterid.assembly.assemblyname}}</td></tr>
+
+                <tr><th>Adhar Copy</th><td><img src="{{v.adhar.url}}" alt="image" length="150px" width="155px"/> </td></tr>
+
+
+
+</td>
+
+
+
+
+
+
+{% endfor %}
+
+        {% for v in voterid %}
+    <tr> <th>Voter ID Copy</th> <td><img src="{{v.voteridcopy.url}}" alt="image" length="150px" width="155px"/> </td> </tr>
+        {% endfor%}
+
+    {% for v in photo %}
+    <tr>  <th>Photo</th><td><img src="{{v.photo.url}}" alt="image" length="150px" width="155px"/> </td> </tr>
+        {% endfor%}
+</table>
+
+    <td><input type="submit" name="approve" value="APPROVE" class="btn cryptos-btn btn-2 mt-30"></td> <td><input type="submit" name="reject" value="REJECT" class="btn cryptos-btn btn-2 mt-30"></td>
+    {% else %}
+    list is empty
+    {% endif %}
+
+
+
+    </form>
+	</div>
+	</div>
+{% endblock %}

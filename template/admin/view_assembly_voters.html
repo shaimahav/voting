@@ -1,0 +1,40 @@
+
+<table border="2" cellpadding="5px" cellspacing="5px">
+{% if data %}
+<tr>
+   <th>Fullname</th>
+
+   <th>Address</th>
+
+   <th>Gender</th>
+
+   <th>Date of Birth</th>
+
+    <th>Location</th>
+
+    <th>Assembly</th>
+</tr>
+{% for v in data %}
+<tr>
+  <td>{{v.firstname}}  {{v.lastname}}</td>
+
+  <td>{{v.address}}</td>
+
+  <td>{{v.gender}}</td>
+
+  <td>{{v.dateofbirth}}</td>
+
+    <td>{{v.location.place}}</td>
+
+    <td>{{v.assembly.assemblyname}}</td>
+
+
+    <td><a href="{% url 'details' v.id %}">Details</a></td>
+</tr>
+
+{% endfor %}
+    {% else %}
+    list is empty
+    {% endif %}
+  </table>
+  

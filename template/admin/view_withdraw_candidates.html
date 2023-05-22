@@ -1,0 +1,105 @@
+{% extends 'admin/view_base.html'%}
+
+{% block content %}
+
+
+<h3>VIEW <span>WITHDRAW</span><br>CANDIDATES</h3>
+<script src="/static/jquery.min.js"></script>
+    <script>
+
+					$(document).ready(function(){
+
+$("#ddlstate").change( function(){
+             stateid=$("#ddlstate").val();
+
+            $.ajax({
+
+            url:"{%  url  'getDistrict' %}",
+            data:{'state_id':stateid},
+            success:function(data)
+            {
+$('#ddldistrict').html(data);
+
+            }
+            });
+        });
+
+
+
+        $("#ddldistrict").change( function(){
+             districtid=$("#ddldistrict").val();
+
+            $.ajax({
+
+            url:"{%  url  'getplace' %}",
+            data:{'district_id':districtid},
+            success:function(data)
+            {
+$('#ddlplace').html(data);
+
+            }
+            });
+        });
+
+
+     $("#ddlplace").change( function(){
+             landmarkid=$("#ddlplace").val();
+
+            $.ajax({
+
+            url:"{%  url  'getassembly' %}",
+            data:{'place_id':landmarkid},
+            success:function(data)
+            {
+$('#ddlassembly').html(data);
+
+            }
+            });
+        });
+
+        $("#ddlassembly").change( function(){
+             assemblyid=$("#ddlassembly").val();
+
+            $.ajax({
+
+            url:"{%  url  'getwithdrawcandidate' %}",
+            data:{'assembly_id':assemblyid},
+            success:function(data)
+            {
+$('#result').html(data);
+
+            }
+            });
+
+        });
+  });
+   </script>
+
+State:<select name='state' id="ddlstate" class="form-control" style="height:50px">
+<option value="00">select</option>
+{% for c in state %}
+<option value="{{c.id}}">{{c.state}}
+</option>
+{% endfor %}
+</select><br><br>
+
+District:<select name='district' id="ddldistrict" class="form-control" style="height:50px">
+<option value="00">select</option>
+
+</select><br><br>
+
+Landmark:<select name='place' id="ddlplace" class="form-control" style="height:50px">
+<option value="00">select</option>
+
+</select><br><br>
+
+Assembly:<select name='state' id="ddlassembly" class="form-control" style="height:50px">
+<option value="00">select</option>
+
+</select><br><br>
+<p id="result"></p>
+
+
+
+  {% endblock %}
+

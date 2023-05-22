@@ -1,0 +1,54 @@
+
+
+{% extends 'candidate/view_base.html'%}
+
+{% block content %}
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<h3>VIEW <span> WORKS</span></h3>
+<table border="2" cellpadding="5px" cellspacing="5px">
+{% if data %}
+
+
+<tr>
+    <th>Qualification</th>
+
+     <th>Work 1</th>
+
+     <th>Work 1 photo</th>
+
+    <th>Work 2</th>
+
+  <th>Work 2 Photo</th>
+
+    <th>Work 3</th>
+
+
+  <th>Work 3 photo</th>
+
+   <th>Achievements</th>
+</tr>
+{% for v in data %}
+
+<tr>
+
+       <td>{{v.qualification}}</td>
+     <td>{{v.work1}}</td>
+   <td><img src="{{v.work1photo.url}}" alt="image" length="50px" width="55px"/> </td>
+     <td>{{v.work2}}</td>
+<td><img src="{{v.work2photo.url}}" alt="image" length="50px" width="55px"/></td>
+   <td>{{v.work3}}</td>
+    <td><img src="{{v.work3photo.url}}" alt="image" length="50px" width="55px"/></td>
+    <td>{{v.achievements}}</td>
+    <td><a href="{% url 'work_delete' v.id %}">DELETE</a></td>
+</tr>
+
+
+    {% endfor %}
+    {% else %}
+    list is empty
+    {% endif %}
+</table>
+</div>
+</div>
+{% endblock %}

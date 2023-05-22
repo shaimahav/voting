@@ -1,0 +1,46 @@
+{% extends 'voter/base.html'%}
+
+{% block content %}
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<h3>UPDATE <span>PROFILE</span><br></h3>
+<form method="post" action="{% url 'voter_updateaction' %}">
+    {% csrf_token %}
+    <table align="center">
+
+    {% if voterregister %}
+
+
+
+        {% for v in voterregister %}
+
+        <tr><td>Firstname:<input type="text" name="fname" value="{{v.firstname}}"  class="form-control" style="height:50px"/> </td></tr>
+        <tr><td>Lastname:<input type="text" name="lname" value="{{v.lastname}}"  class="form-control" style="height:50px"/></td> </tr>
+        <tr><td>Address:<textarea rows="4" col="9" name="address"  class="form-control" style="height:50px"> {{v.address}}</textarea></td></tr>
+        <tr><td>Gender:<input type='radio' name='gender' value='MALE'{% ifequal v.gender  'MALE' %}checked{% endifequal %}/>MALE
+        <input type='radio' name='gender' value='FEMALE' {% ifequal v.gender 'FEMALE' %}checked{% endifequal %}/>FEMALE</td></tr>
+        <tr><td>Date of Birth:<input type="date" name="dob"value="{{v.dateofbirth}}"  class="form-control" style="height:50px"/></td> </tr>
+        <tr><td>Email:<input type="email" name="email"value="{{v.email}}"  class="form-control" style="height:50px"/></td> </tr>
+        <tr><td>Mobile:<input type="text" name="mobile"value="{{v.mobile}}"  class="form-control" style="height:50px"/></td> </tr>
+        <tr><td><input type="submit" value="UPDATE" class="form-control" style="height:50px"class="btn cryptos-btn btn-2 mt-30"></td> </tr>
+
+
+    {% endfor %}
+    {% else %}
+    list is empty
+    {% endif %}
+        {% if msg %}
+
+    <script type="text/javascript">
+        alert("Updated successfully");
+     </script>
+        {% endif %}
+
+
+ </table>
+
+</form>
+</div>
+</div>
+
+{% endblock %}

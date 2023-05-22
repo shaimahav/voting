@@ -1,0 +1,157 @@
+
+{% extends 'candidate/view_base.html' %}
+{% block content %}
+
+{% if data %}
+                              
+<div class="single-price-table d-flex align-items-center justify-content-between">
+                            <div class="p-content d-flex align-items-center">
+                                <span>{{forloop.counter}}</span>
+                                <img src="/static/cryptos-master/img/bg-img/nemz.png" alt="">
+                               {% ifequal msg 'tie_up' %}
+                               <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WINNERS ARE</h6>
+{% else %}
+
+<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WINNER</h6>
+
+
+{% endifequal %}
+                                </div>
+
+                        </div>
+
+    {% for v in data %}
+	
+
+				<div class="single-blog-area d-flex align-items-start">
+                            <!-- Thumbnail -->
+							
+                            <div class="blog-thumbnail">
+							
+                                <img src="{{v.photo.url}}" alt="" width="200px" height="250px">
+                            </div>
+							
+                            <!-- Content -->
+                            <div class="blog-content">
+                                <h3 class="post-title">{{v.candidateregisterid.firstname}} {{v.candidateregisterid.lastname}}</h3>
+                                <div class="meta-data">
+								 <a href="#">Party: {{v.candidateregisterid.partyid.partyname}}</a> <br>
+								 <a href="#">Vote : {{v.candidateregisterid.count_vote}}</a> <br>
+
+				    <a href="#">Assembly: {{v.candidateregisterid.assemblyname.assemblyname}}</a> <br>
+                                     <!--<a href="#">Adhar No: {{v.candidateregisterid.adharno}}</a> <br>
+                                   <a href="#">VoterID No: {{v.candidateregisterid.voterid}}</a> -->
+                                </div>
+                               
+								<div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                            <div class="blog-thumbnail">
+							
+                                <img src="{{v.candidateregisterid.symbol.symbol.url}}" alt="" width="200px" height="450px">
+                            </div>
+							</div>
+                            </div>
+							
+                        </div>
+						  <div class="single-price-table d-flex align-items-center justify-content-between">
+                            <div class="p-content d-flex align-items-center">
+                                <span>{{forloop.counter}}</span>
+                                <img src="/static/cryptos-master/img/bg-img/nem.png" alt="">
+                                <p>{{v.candidateregisterid.firstname}} <span>{{v.candidateregisterid.lastname}}</span></p>, {{v.candidateregisterid.partyid.partyname}} ,
+				<h6> Total Vote  {{v.candidateregisterid.count_vote}} </h6>
+                            </div>
+                          
+                        </div>
+							<hr>
+
+{% endfor %}
+    {% else %}
+    Result Not Yet Published
+    {% endif %}
+
+
+{% if rem %}
+
+<div class="single-price-table d-flex align-items-center justify-content-between">
+                            <div class="p-content d-flex align-items-center">
+                                <span>{{forloop.counter}}</span>
+                                <img src="/static/cryptos-master/img/bg-img/nemz.png" alt="">
+                               <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;REMAINING CANDIDATES ARE</h6>
+                            </div>
+                          
+                        </div>
+    
+    {% for v in rem %}
+	
+
+				<div class="single-blog-area d-flex align-items-start">
+                            <!-- Thumbnail -->
+							
+                            <div class="blog-thumbnail">
+							
+                                <img src="{{v.photo.url}}" alt="" width="200px" height="250px">
+                            </div>
+							
+                            <!-- Content -->
+                            <div class="blog-content">
+                                <h3 class="post-title">{{v.firstname}} {{v.lastname}}</h3>
+                                <div class="meta-data">
+								 <a href="#">Party: {{v.partyid.partyname}}</a> <br>
+								 <a href="#">Vote : {{v.count_vote}}</a> <br>
+
+				    <a href="#">Assembly: {{v.assemblyname.assemblyname}}</a> <br>
+                                    <!-- <a href="#">Adhar No: {{v.adharno}}</a> <br>
+                                   <a href="#">VoterID No: {{v.voterid}}</a> -->
+                                </div>
+                               
+								<div class="single-blog-area blog-style-3 d-flex align-items-center mb-15">
+                            <div class="blog-thumbnail">
+							
+                                <img src="{{v.symbol.symbol.url}}" alt="" width="200px" height="450px">
+                            </div>
+							</div>
+                            </div>
+							
+                        </div>
+						  <div class="single-price-table d-flex align-items-center justify-content-between">
+                            <div class="p-content d-flex align-items-center">
+                                <span>{{forloop.counter}}</span>
+                                <img src="/static/cryptos-master/img/bg-img/nem.png" alt="">
+                                <p>{{v.firstname}} <span>{{v.lastname}}</span></p>, {{v.partyid.partyname}} ,
+				<h6> Total Vote  {{v.count_vote}} </h6>
+                            </div>
+                          
+                        </div>
+							<hr>
+
+{% endfor %}
+
+
+{% endif %}
+
+
+
+	
+	{% ifequal msg 'done' %}
+	<script type="text/javascript">
+	alert("Vote has been done already");
+	
+	</script>
+	{% endifequal %}
+
+{% ifequal msg 'success' %}
+	<script type="text/javascript">
+	alert("Voting has been completed successfully");
+	
+	</script>
+	{% endifequal %}
+
+{%ifequal msg 'published' %}
+
+
+<script type="text/javascript">
+alert("Result already published");
+</script>
+
+{% endifequal %}
+
+{% endblock %}

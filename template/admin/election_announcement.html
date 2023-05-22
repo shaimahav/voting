@@ -1,0 +1,237 @@
+{% extends 'admin/base.html'%}
+
+{% block content %}
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<h3>ELECTION <span>ANNOUNCEMENT</span><br></h3>
+                        <script src="/static/jquery.min.js"></script>
+    <script>
+
+					$(document).ready(function(){
+
+ $("#ddlstate").change( function(){
+             stateid=$("#ddlstate").val();
+
+            $.ajax({
+
+            url:"{%  url  'getDistrict' %}",
+            data:{'state_id':stateid},
+            success:function(data)
+            {
+$('#ddldistrict').html(data);
+
+            }
+            });
+        });
+
+
+
+        $("#ddldistrict").change( function(){
+             districtid=$("#ddldistrict").val();
+
+            $.ajax({
+
+            url:"{%  url  'getplace' %}",
+            data:{'district_id':districtid},
+            success:function(data)
+            {
+$('#ddlplace').html(data);
+
+            }
+            });
+        });
+
+
+     $("#ddlplace").change( function(){
+             landmarkid=$("#ddlplace").val();
+
+            $.ajax({
+
+            url:"{%  url  'getassembly' %}",
+            data:{'place_id':landmarkid},
+            success:function(data)
+            {
+$('#ddlassembly').html(data);
+
+            }
+            });
+        });
+
+        });
+        </script>
+
+                         <script type="text/javascript">
+		function validation()
+		{
+			var alpha=/^[a-zA-Z]+$/;
+			//var num=/^[0-9]+$/;
+
+			//var alphanum=/^(?=.*[a-zA-Z])(?=.*[0-9])/; //atleast one digit
+
+			//var email=/^[\w\-\.\+]+\@[a-z A-Z 0-9\.\-]+\.[a-z A-Z 0-9]{2,4}$/;
+
+			var name=document.announcement.election_name;
+			var state=document.announcement.state;
+			var district=document.announcement.district;
+            var landmark=document.announcement.location;
+            var assembly=document.announcement.assembly;
+            var declarationdate=document.announcement.declaration_date;
+            var nominationsubdate=document.announcement.nomination_submission_date;
+            var nominationwitdate=document.announcement.nomination_withdraw_date;
+            var campinestartdate=document.announcement.campine_starting_date;
+            var campineenddate=document.announcement.campine_ending_date;
+            var electiondate=document.announcement.election_date;
+            var resultdate=document.announcement.result_date;
+
+
+            if(name.value.length==0)
+			{
+				alert("Please Enter election name ");
+				name.focus();
+				return false;
+			}
+			else if(!name.value.match(alpha))
+			{
+				alert("invalid name");
+				name.focus();
+				return false;
+			}
+			if(state.value=="00")
+			{
+				alert("Please select your state ");
+				return false;
+			}
+			if(district.value=="00")
+			{
+				alert("Please select your district ");
+				return false;
+			}
+			if(landmark.value=="00")
+			{
+				alert("Please select your landmark ");
+				return false;
+			}
+			if(assembly.value=="00")
+			{
+				alert("Please select your assembly ");
+				return false;
+			}
+			if(declarationdate.value.length==0)
+			{
+				alert("Please enter the declaration date ");
+			    declarationdate.focus();
+				return false;
+			}
+			if(nominationsubdate.value.length==0)
+			{
+				alert("Please enter the nomination submission date ");
+			    nominationsubdate.focus();
+				return false;
+			}
+			if(nominationwitdate.value.length==0)
+			{
+				alert("Please enter the nomination withdraw date ");
+			    nominationwitdate.focus();
+				return false;
+			}
+			if(campinestartdate.value.length==0)
+			{
+				alert("Please enter the campine starting date ");
+			    campinestartdate.focus();
+				return false;
+			}
+            if(campineenddate.value.length==0)
+			{
+				alert("Please enter the campine ending date ");
+			    campineenddate.focus();
+				return false;
+			}
+            if(electiondate.value.length==0)
+			{
+				alert("Please enter the election  date ");
+			    electiondate.focus();
+				return false;
+			}
+            if(resultdate.value.length==0)
+			{
+				alert("Please enter the result date ");
+			    resultdate.focus();
+				return false;
+			}
+
+
+
+
+
+
+            else
+			{
+			return true;
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+<form method="post" name="announcement" action="{% url 'election_announcement_action' %}" enctype="multipart/form-data">
+{% csrf_token %}
+Election Name:<input type="text" name="election_name"class="form-control">
+
+State:<select name='state' id="ddlstate" class="form-control" style="height:50px">
+<option value="00">select</option>
+{% for c in state %}
+<option value="{{c.id}}">{{c.state}}
+</option>
+{% endfor %}
+</select>
+
+     District:<select name='district' id="ddldistrict" class="form-control" style="height:50px">
+    <option value="00">select</option>
+
+</select>
+
+    Landmark:<select name='location' id="ddlplace" class="form-control"  style="height:50px">
+<option value="00">select</option>
+
+</select>
+    Assembly:<select name='assembly' id="ddlassembly" class="form-control"  style="height:50px">
+<option value="00">select</option>
+
+</select>
+
+Declaration Date:<input type="date" name="declaration_date"class="form-control"  style="height:50px">
+Nomination Submission Date:<input type="date" name="nomination_submission_date"class="form-control"  style="height:50px">
+Nomination Withdraw Date:<input type="date" name="nomination_withdraw_date"class="form-control"  style="height:50px">
+
+Campine Starting Date:<input type="date" name="campine_starting_date"class="form-control"  style="height:50px">
+
+Campine Ending Date:<input type="date" name="campine_ending_date"class="form-control"  style="height:50px">
+
+Election Date:<input type="date" name="election_date"class="form-control"  style="height:50px">
+
+Result Date:<input type="date" name="result_date"class="form-control"  style="height:50px">
+
+<input type='submit'value='SUBMIT' id="btnsave"class="btn cryptos-btn btn-2 mt-30" onclick="return validation()">
+    {% if msg %}
+
+    <script type="text/javascript">
+        alert("Added Successfully");
+     </script>
+    {% endif %}
+
+</form>
+                    </div>
+</div>
+
+{% endblock %}
+

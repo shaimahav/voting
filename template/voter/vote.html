@@ -1,0 +1,34 @@
+{% extends 'voter/base.html'%}
+
+{% block content %}
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+<h3>VOTE<br></h3>
+<table border="2" cellpadding="5px" cellspacing="5px">
+{% if data %}
+    <tr>
+
+     <th>Name</th>
+&nbsp;
+     <th>Party</th>
+&nbsp;
+     <th>Symbol</th>
+    </tr>
+    {% for v in data %}
+<tr>
+  <td>{{v.firstname}} {{v.lastname}}</td>
+&nbsp;
+   <td>{{v.partyid.partyname}}</td>
+&nbsp;
+    <td> <img src="{{v.symbol.symbol.url}}" alt="image" length="50px" width="55px"/> </td>
+<td><a >VOTE</a> </td>
+
+</tr>
+{% endfor %}
+    {% else %}
+    list is empty
+    {% endif %}
+</table>
+</div>
+</div>
+{% endblock %}

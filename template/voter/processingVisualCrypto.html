@@ -1,0 +1,59 @@
+{% extends 'voter/view_base.html' %}
+{% block content %}
+
+<form method="post" action="{% url 'processingVisualCryptoAction' %}" enctype="multipart/form-data">
+{% csrf_token %}
+
+{% for v in data %}
+
+<input type="hidden" name="hdn_candidatephoto_id" id="hdn_candidatephoto_id" value="{{v.id}}" />
+
+ <div class="col-12">
+                                <div class="single-blog-area blog-style-2 mb-100">
+                                    <!-- Thumbnail -->
+                                    <div class="blog-thumbnail">
+
+                                        <img src="{{v.photo.url}}" alt="">
+                                    </div>
+                                    <!-- Content -->
+                                    <div class="blog-content">
+                                        <a href="#" class="post-title">{{v.candidateregisterid.firstname}} {{v.candidateregisterid.lastname}}</a>
+                                        <div class="meta-data">
+                                             <a href="#">Party: {{v.candidateregisterid.partyid.partyname}}</a> <br>
+                                           <!-- <a href="#">March 18, 2018</a>-->
+                                        </div>
+										
+                                        <!--<p>Morbi vel arcu gravida, iaculis lacus vel, posuere ipsum. Sed faucibus mauris vitae urna consectetur, sit amet maximus nisl sagittis.</p>
+                                        <a href="#" class="btn cryptos-btn mt-50">Read More</a>-->
+                                    </div>
+                                </div>
+                            </div>
+
+
+{% endfor %}
+
+
+Upload Share Here...
+
+<input type="file" name="upload_share" id="upload_share" class="form-control" />
+<input type="submit" name="process" value="start processing" class="btn cryptos-btn mt-50"  />
+
+</form>
+
+
+{% ifequal msg 'invalid' %}
+	<script type="text/javascript">
+	alert("Invalid Password");
+	
+	</script>
+	{% endifequal %}
+
+{% ifequal msg 'invalid_file' %}
+	<script type="text/javascript">
+	alert("Invalid File");
+
+	</script>
+	{% endifequal %}
+
+
+{% endblock %}

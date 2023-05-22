@@ -1,0 +1,63 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+<script type="text/javascript">
+		function validation()
+		{
+			var alpha=/^[a-zA-Z]+$/;
+			//var num=/^[0-9]+$/;
+
+			//var alphanum=/^(?=.*[a-zA-Z])(?=.*[0-9])/; //atleast one digit
+
+			//var email=/^[\w\-\.\+]+\@[a-z A-Z 0-9\.\-]+\.[a-z A-Z 0-9]{2,4}$/;
+
+			var district=document.landmark.district;
+            var landmark=document.landmark.landmark;
+
+			if(district.value=="00")
+			{
+				alert("Please select district");
+				return false;
+			}
+			if(landmark.value.length==0)
+			{
+				alert("Please Enter landmark name ");
+				landmark.focus();
+				return false;
+			}
+			else if(!landmark.value.match(alpha))
+			{
+				alert("invalid landmark name");
+				landmark.focus();
+				return false;
+			}
+
+			else
+			{
+			return true;
+			}
+		}
+
+</script>
+<h3>ADD <span>LANDMARK</span><br></h3>
+<div class="col-12 col-lg-6">
+                    <div class="contact-form-area mb-100">
+ <form method="post" name="landmark" action="{% url 'landmarkaddaction' %}">
+     {% csrf_token %}
+     
+    DISTRICT:<select name='district'class="form-control"  style="height:50px">
+<option value="00">select</option>
+{% for c in data %}
+<option value="{{c.id}}">{{c.district}}
+</option>
+{% endfor %}
+     </select>
+LANDMARK:<input type="text" name="landmark" class="form-control"  style="height:50px">
+     <input type="submit" value="ADD" class="btn cryptos-btn btn-2 mt-30" onclick="return validation()">
+     {% if msg %}
+        {{msg}}
+        {% endif %}
+
+		</form>
+		</div>
+		</div>
+{% endblock %}
